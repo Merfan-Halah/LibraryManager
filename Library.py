@@ -1,6 +1,7 @@
 from Book import Book
 import json
 
+
 class Library:
 
     def __init__(self):
@@ -20,7 +21,7 @@ class Library:
                 book.status = "Borrowed"
                 print(f"You borrowed {book.title}")
             else:
-                print('Book is not available')
+                print("Book is not available")
 
     def returnBook(self, title):
         for book in self.bookList:
@@ -28,7 +29,12 @@ class Library:
                 book.status = "Available"
                 print(f"You returned {book.title}")
             else:
-                print('Book was not borrowed')
+                print("Book was not borrowed")
+
+    def searchBook(self, input):
+        for book in self.bookList:
+            if book.title == input or book.author == input:
+                print(book)
 
     def saveToFile(self, filename="library.txt"):
         with open(filename, 'w') as f:
@@ -41,7 +47,8 @@ class Library:
         try:
             with open(filename, 'r') as f:
                 json_data = json.load(f)
-                self.bookList = [Book(book['title'], book['author'], book['year'], book['status']) for book in json_data]
+                self.bookList = [Book(book['title'], book['author'], book['year'], book['status']) for book in
+                                 json_data]
             print("Library data loaded.")
         except FileNotFoundError:
             print("No previous library data found")
