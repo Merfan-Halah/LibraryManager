@@ -16,20 +16,26 @@ class Library:
             print(book)
 
     def borrowBook(self, title):
+        borrowed = False
         for book in self.bookList:
             if book.title == title and book.status == "Available":
                 book.status = "Borrowed"
-                print(f"You borrowed {book.title}")
-            else:
-                print("Book is not available")
+                borrowed = True
+        if borrowed:
+            print(f"You borrowed {title}")
+        else:
+            print("Book is not available")
 
     def returnBook(self, title):
+        available = False
         for book in self.bookList:
             if book.title == title and book.status == "Borrowed":
                 book.status = "Available"
-                print(f"You returned {book.title}")
-            else:
-                print("Book was not borrowed")
+                available = True
+        if available:
+            print(f"You returned {title}")
+        else:
+            print("Book was not borrowed")
 
     def searchBook(self, input):
         for book in self.bookList:
